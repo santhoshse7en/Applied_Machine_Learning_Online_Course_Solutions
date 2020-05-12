@@ -7,6 +7,8 @@ import sqlite3
 
 conn = sqlite3.connect('Db-IMDB.db')
 cursor = conn.cursor()
+
+
 cursor.execute('UPDATE Movie SET year = REPLACE(year, "I", "");')
 cursor.execute('UPDATE Movie SET year = REPLACE(year, "V", "");')
 cursor.execute('UPDATE Movie SET year = REPLACE(year, "X ", "");')
@@ -34,6 +36,8 @@ cursor.execute('UPDATE Person SET name = RTRIM(LTRIM(name));')
 cursor.execute('UPDATE Person SET pid = RTRIM(LTRIM(pid));')
 cursor.execute('UPDATE Person SET gender = RTRIM(LTRIM(gender));')
 
-# conn.commit() temporary ( un-comment it to make permanent)
+
+conn.commit()
+
 
 pd.read_sql_query(""" SELECT * from movie ORDER BY year DESC limit 5""", conn)
